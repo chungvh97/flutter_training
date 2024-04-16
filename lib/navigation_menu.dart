@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:layout_app/modal/items.dart';
 import 'package:layout_app/screen/add_task.dart';
 import 'package:layout_app/screen/card_body.dart';
 
@@ -15,6 +16,8 @@ class BottomNavigationBarExample extends StatefulWidget {
 class _BottomNavigationBarExampleState
     extends State<BottomNavigationBarExample> {
   int _selectedIndex = 0;
+
+  final List<DataItems> items = [];
 
   static const List<Widget> _widgetOptions = <Widget>[
     CardBody(),

@@ -1,23 +1,19 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:layout_app/modal/items.dart';
 
-class CardBody extends StatefulWidget {
-  const CardBody({super.key});
+class CardBody extends StatelessWidget {
+  CardBody({
+    super.key,
+    required this.item,
+    required this.handleDelete,
+  });
 
-  @override
-  State<CardBody> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<CardBody> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
-  final List<DataItems> items = [];
-  void _handleDelete(String id) {
-    setState(() {
-      items.removeWhere((element) => element.id == id);
-    });
-  }
+  var item;
+  final Function handleDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +78,9 @@ class _MyAppState extends State<CardBody> {
                             child: InkWell(
                               onTap: () async {
                                 print('222');
-                                // if (await confirm(context)) {
-                                //   _handleDelete(item.id);
-                                // }
+                                if (await confirm(context)) {
+                                  handleDelete(item.id);
+                                }
                                 return;
                               },
                               child: const Icon(
