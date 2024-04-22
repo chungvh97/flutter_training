@@ -17,12 +17,26 @@ class _BottomNavigationBarExampleState
     extends State<BottomNavigationBarExample> {
   int _selectedIndex = 0;
 
-  final List<DataItems> items = [];
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    CardBody(),
-    Complete(),
+  final List<DataItems> items = [
+    DataItems(
+        id: '1', title: 'chung1', sub_title: 'sub_title1', complete: false),
+    DataItems(
+        id: '2', title: 'chung2', sub_title: 'sub_title2', complete: false),
+    DataItems(
+        id: '3', title: 'chung3', sub_title: 'sub_title3', complete: false),
   ];
+
+  void _handleDelete(String id) {
+    setState(() {
+      items.removeWhere((element) => element.id == id);
+    });
+  }
+
+  void _handleUpdate(String id, String title, String subTitle) {
+    print(id);
+    print(title);
+    print(subTitle);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,8 +44,32 @@ class _BottomNavigationBarExampleState
     });
   }
 
+  void _handleAddTask(String title, String subTitle) {
+    final newItem = DataItems(
+        id: DateTime.now().toString(),
+        title: title,
+        sub_title: subTitle,
+        complete: true);
+    setState(() {
+      items.add(newItem);
+    });
+  }
+
+  List<Widget> _createWidgetOptions() {
+    return [
+      CardBody(
+        items: items,
+        handleDelete: _handleDelete,
+        handleUpdate: _handleUpdate,
+      ),
+      const Complete(),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final List<Widget> widgetOptions = _createWidgetOptions();
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(214, 215, 239, 1),
       appBar: AppBar(
@@ -47,8 +85,14 @@ class _BottomNavigationBarExampleState
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => const AddTask())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => AddTask(
+                        type: 'Add Task',
+                        item: const {},
+                        handleSubmit: _handleAddTask,
+                      ))));
         },
         backgroundColor: const Color.fromRGBO(147, 149, 211, 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
@@ -59,7 +103,7 @@ class _BottomNavigationBarExampleState
         ),
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
