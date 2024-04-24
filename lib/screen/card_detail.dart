@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:layout_app/modal/items.dart';
 
-class AddTask extends StatefulWidget {
-  const AddTask(
+class CardDetail extends StatefulWidget {
+  const CardDetail(
       {super.key,
       required this.item,
       required this.id,
@@ -21,10 +21,10 @@ class AddTask extends StatefulWidget {
   final Function handleSubmit;
 
   @override
-  State<AddTask> createState() => _AddTaskState();
+  State<CardDetail> createState() => _StateCardDetail();
 }
 
-class _AddTaskState extends State<AddTask> {
+class _StateCardDetail extends State<CardDetail> {
   TextEditingController titleController = TextEditingController();
   TextEditingController subTitleController = TextEditingController();
 
@@ -35,22 +35,15 @@ class _AddTaskState extends State<AddTask> {
 
     if (widget.type == 'Add Task') {
       widget.handleSubmit('', titleController.text, subTitleController.text);
-      Navigator.pop(context);
     } else {
       if (widget.item is DataItems) {
         DataItems item = widget.item as DataItems;
 
-        // final newData = {
-        //   id: item.id,
-        //   title: titleController.text,
-        //   subTitle: subTitleController.text
-        // };
-        widget.handleSubmit(item.id, titleController.text, subTitleController.text);
+        widget.handleSubmit(
+            item.id, titleController.text, subTitleController.text);
       }
-      Navigator.pop(context);
     }
-
-    // Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override
@@ -135,7 +128,7 @@ class _AddTaskState extends State<AddTask> {
                     ),
                   )
                 : Row(
-                    // mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       ElevatedButton(
                         style: ButtonStyle(
@@ -158,7 +151,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                         ),
                       ),
-                      // Spacer(),
+                      const Spacer(),
                       ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: const MaterialStatePropertyAll(

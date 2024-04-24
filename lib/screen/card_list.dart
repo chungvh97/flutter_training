@@ -1,16 +1,15 @@
 import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:layout_app/modal/items.dart';
-import 'package:layout_app/screen/add_task.dart';
+import 'package:layout_app/screen/card_detail.dart';
 
-class CardBody extends StatelessWidget {
-  const CardBody({
-    super.key,
-    required this.items,
-    required this.handleDelete,
-    required this.handleUpdate,
-    // required List<DataItems> items,
-  });
+class CardList extends StatelessWidget {
+  const CardList(
+      {super.key,
+      required this.items,
+      required this.handleDelete,
+      required this.handleUpdate,
+      required this.handleComplete});
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -19,14 +18,18 @@ class CardBody extends StatelessWidget {
   // var item;
   final Function handleDelete;
   final Function handleUpdate;
+  final Function handleComplete;
 
   @override
   Widget build(BuildContext context) {
+    List<DataItems> completedItems =
+        items.where((item) => !item.complete).toList();
+
     return Container(
         child: ListView(
-      children: items.map((item) {
+      children: completedItems.map((item) {
         return Padding(
-          padding: const EdgeInsets.fromLTRB(7, 15, 7, 0),
+          padding: const EdgeInsets.fromLTRB(7, 5, 7, 5),
           child: Column(
             children: [
               Container(
@@ -76,7 +79,7 @@ class CardBody extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) => AddTask(
+                                            builder: ((context) => CardDetail(
                                                   type: 'Edit Task',
                                                   item: item,
                                                   id: item.id,
@@ -111,7 +114,7 @@ class CardBody extends StatelessWidget {
                                 width: 50,
                                 child: InkWell(
                                   onTap: () async {
-                                    print('123');
+                                    handleComplete(item.id);
                                     return;
                                   },
                                   child: const Icon(

@@ -2,7 +2,7 @@ class DataItems {
   String id;
   String title;
   String sub_title;
-  final bool complete;
+  bool complete;
 
   DataItems({
     required this.id,
