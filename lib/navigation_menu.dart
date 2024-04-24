@@ -23,7 +23,7 @@ class _BottomNavigationBarExampleState
     DataItems(
         id: '2', title: 'chung2', sub_title: 'sub_title2', complete: false),
     DataItems(
-        id: '3', title: 'chung3', sub_title: 'sub_title3', complete: false),
+        id: '3', title: 'chung33123213', sub_title: 'sub_title3', complete: false),
   ];
 
   void _handleDelete(String id) {
@@ -33,9 +33,12 @@ class _BottomNavigationBarExampleState
   }
 
   void _handleUpdate(String id, String title, String subTitle) {
-    print(id);
-    print(title);
-    print(subTitle);
+   // Find the person with the given id
+    setState(() {
+      DataItems? personToUpdate = items.firstWhere((person) => person.id == id);
+      personToUpdate.title = title;
+      personToUpdate.sub_title = subTitle;
+    });
   }
 
   void _onItemTapped(int index) {
@@ -44,7 +47,7 @@ class _BottomNavigationBarExampleState
     });
   }
 
-  void _handleAddTask(String title, String subTitle) {
+  void _handleAddTask(String id, String title, String subTitle) {
     final newItem = DataItems(
         id: DateTime.now().toString(),
         title: title,
@@ -90,7 +93,10 @@ class _BottomNavigationBarExampleState
               MaterialPageRoute(
                   builder: ((context) => AddTask(
                         type: 'Add Task',
-                        item: const {},
+                        item: {},
+                        id: '',
+                        title: '',
+                        subTitle: '',
                         handleSubmit: _handleAddTask,
                       ))));
         },

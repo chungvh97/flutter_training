@@ -1,7 +1,7 @@
 class DataItems {
-  final String id;
-  final String title;
-  final String sub_title;
+  String id;
+  String title;
+  String sub_title;
   final bool complete;
 
   DataItems({

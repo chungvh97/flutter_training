@@ -45,6 +45,7 @@ class CardBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 item.title,
@@ -78,8 +79,9 @@ class CardBody extends StatelessWidget {
                                             builder: ((context) => AddTask(
                                                   type: 'Edit Task',
                                                   item: item,
-                                                  // title: item.title,
-                                                  // subTitle: item.sub_title,
+                                                  id: item.id,
+                                                  title: item.title,
+                                                  subTitle: item.sub_title,
                                                   handleSubmit: handleUpdate,
                                                 ))));
                                     return;

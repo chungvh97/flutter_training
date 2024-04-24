@@ -6,11 +6,17 @@ class AddTask extends StatefulWidget {
   const AddTask(
       {super.key,
       required this.item,
+      required this.id,
+      required this.title,
+      required this.subTitle,
       required this.type,
       required this.handleSubmit});
 
   final Object item;
   final String type;
+  final String title;
+  final String subTitle;
+  final String id;
 
   final Function handleSubmit;
 
@@ -27,25 +33,21 @@ class _AddTaskState extends State<AddTask> {
       return;
     }
 
-    if (widget.item is DataItems) {
-      DataItems item = widget.item as DataItems;
-      print(item);
-    }
-
     if (widget.type == 'Add Task') {
-      widget.handleSubmit(titleController.text, subTitleController.text);
+      widget.handleSubmit('', titleController.text, subTitleController.text);
       Navigator.pop(context);
     } else {
       if (widget.item is DataItems) {
         DataItems item = widget.item as DataItems;
 
-        final newData = {
-          id: item.id,
-          title: titleController.text,
-          subTitle: subTitleController.text
-        };
-        widget.handleSubmit(titleController.text, subTitleController.text);
+        // final newData = {
+        //   id: item.id,
+        //   title: titleController.text,
+        //   subTitle: subTitleController.text
+        // };
+        widget.handleSubmit(item.id, titleController.text, subTitleController.text);
       }
+      Navigator.pop(context);
     }
 
     // Navigator.pop(context);
@@ -133,6 +135,7 @@ class _AddTaskState extends State<AddTask> {
                     ),
                   )
                 : Row(
+                    // mainAxisSize: MainAxisSize.min,
                     children: [
                       ElevatedButton(
                         style: ButtonStyle(
@@ -155,6 +158,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                         ),
                       ),
+                      // Spacer(),
                       ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor: const MaterialStatePropertyAll(
