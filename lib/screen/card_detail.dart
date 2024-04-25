@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:layout_app/modal/items.dart';
@@ -104,7 +105,7 @@ class _StateCardDetail extends State<CardDetail> {
             (widget.type == 'Add Task')
                 ? SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 65,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: const MaterialStatePropertyAll(
@@ -112,7 +113,7 @@ class _StateCardDetail extends State<CardDetail> {
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                         ),
                       ),
@@ -127,54 +128,63 @@ class _StateCardDetail extends State<CardDetail> {
                       ),
                     ),
                   )
-                : Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Color.fromRGBO(147, 149, 211, 1)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                : SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        SizedBox(
+                          width: (MediaQuery.of(context).size.width - 60) / 2,
+                          height: 65,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: const MaterialStatePropertyAll(
+                                  Color.fromRGBO(147, 149, 211, 1)),
+                              shape:
+                                  MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        onPressed: () => _handleOnClick(context),
-                        child: const Text(
-                          'Update',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Color.fromRGBO(147, 149, 211, 1)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            onPressed: () => _handleOnClick(context),
+                            child: const Text(
+                              'Update',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
+                          )
                         ),
-                        onPressed: () => {Navigator.pop(context)},
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
+                        SizedBox(
+                          width: (MediaQuery.of(context).size.width - 60) / 2,
+                          height: 65,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: const MaterialStatePropertyAll(
+                                  Color.fromRGBO(147, 149, 211, 1)),
+                              shape:
+                                  MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                            onPressed: () => {Navigator.pop(context)},
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
                         ),
-                      ),
-                    ],
-                  )
+                      ],
+                    ),
+                )
           ],
         ),
       ),
